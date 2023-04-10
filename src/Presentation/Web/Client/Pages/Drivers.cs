@@ -9,12 +9,16 @@ namespace Kasi.Web.Client.Pages
 
         // public Drivers(IDriverService driverService)
         // {
+        //     Console.WriteLine("On Constructor Started");
         //     _driverService = driverService;
+        //     Console.WriteLine("On Constructor Ended");
         // }
 
         protected async override Task OnInitializedAsync()
         {
-            _drivers = await _driverService.QueryAsync();
+            Console.WriteLine("On Initialized  Started");
+            // _drivers = await _driverService.QueryAsync();
+            Console.WriteLine("On Initialized Ended");
             // IEnumerable<Driver> drivers = await _driverService.QueryAsync();
 
             // if(drivers != null && drivers.Any())

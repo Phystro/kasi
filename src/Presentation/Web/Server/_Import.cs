@@ -4,4 +4,4 @@ global using Microsoft.EntityFrameworkCore;
 
 global using Kasi.Infrastructure.Persisitence.Context;
 global using Kasi.Domain.Entities;
-global using Kasi.Infrastructure.Services.Web;
+global using Kasi.Infrastructure.Services.Api;

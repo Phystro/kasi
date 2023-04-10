@@ -5,21 +5,19 @@
 
 <br/>
 
-<table>
-    <thead>
-        <tr>
-            <th style="text-align:center">Id</th>
-            <th style="text-align:center">Name</th>
-            <th style="text-align:center">Country</th>
-            <th style="text-align:center">Racing Number</th>
-        </tr>
-    </thead>
-    
-    <tbody>
-        @* <p>@_drivers</p> *@
-
-        @if(_drivers != null && _drivers.Any())
-        {
+@if(_drivers != null && _drivers.Any())
+{
+    <table>
+        <thead>
+            <tr>
+                <th style="text-align:center">Id</th>
+                <th style="text-align:center">Name</th>
+                <th style="text-align:center">Country</th>
+                <th style="text-align:center">Racing Number</th>
+            </tr>
+        </thead>
+        
+        <tbody>
             @foreach (Driver driver in _drivers)
             {
                 <tr>
@@ -29,10 +27,10 @@
                     <td style="text-align:center">@driver.RacingNumber</td>
                 </tr>
             }
-        }
-        else
-        {
-            <p>No Drivers Found!</p>
-        }
-    </tbody>
-</table>
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No Drivers Found!</p>
+}

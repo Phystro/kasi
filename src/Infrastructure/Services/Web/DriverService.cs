@@ -13,7 +13,7 @@ namespace Kasi.Infrastructure.Services.Web
 
         private Encoding encoding = Encoding.UTF8;
         private string mediaType = "application/json";
-        private string route = "drivers";
+        private string route = "http://localhost:5174/drivers";
 
 
         public async Task<Driver> CreateAsync(Driver request)
