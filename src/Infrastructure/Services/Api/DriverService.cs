@@ -1,6 +1,6 @@
 using Kasi.Domain.Entities;
 
-namespace Kasi.Infrastructure.Services
+namespace Kasi.Infrastructure.Services.Api
 {
     public class DriverService : IDriverService
     {
