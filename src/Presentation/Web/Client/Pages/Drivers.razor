@@ -1,0 +1,38 @@
+@page "/drivers"
+
+<PageTitle>F1 Drivers</PageTitle>
+<h1>Welcome, Formula 1 Drivers</h1>
+
+<br/>
+
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:center">Id</th>
+            <th style="text-align:center">Name</th>
+            <th style="text-align:center">Country</th>
+            <th style="text-align:center">Racing Number</th>
+        </tr>
+    </thead>
+    
+    <tbody>
+        @* <p>@_drivers</p> *@
+
+        @if(_drivers != null && _drivers.Any())
+        {
+            @foreach (Driver driver in _drivers)
+            {
+                <tr>
+                    <td style="text-align:right">@driver.Id</td>
+                    <td style="text-align:right">@driver.Name</td>
+                    <td style="text-align:right">@driver.Country</td>
+                    <td style="text-align:center">@driver.RacingNumber</td>
+                </tr>
+            }
+        }
+        else
+        {
+            <p>No Drivers Found!</p>
+        }
+    </tbody>
+</table>
