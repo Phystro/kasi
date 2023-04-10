@@ -1,8 +1,8 @@
 using Kasi.Domain.Entities;
 
-namespace Kasi.Infrastructure.Services.Web
+namespace Kasi.Web.Client.Services
 {
-    public class DriverService : IDriverService
+    public class DriverService
     {
         private readonly HttpClient _httpClient;
 
@@ -13,7 +13,7 @@ namespace Kasi.Infrastructure.Services.Web
 
         private Encoding encoding = Encoding.UTF8;
         private string mediaType = "application/json";
-        private string route = "drivers"; //"http://localhost:5174/drivers";
+        private string route = "api/driver"; //"http://localhost:5174/drivers";
 
 
         public async Task<Driver> CreateAsync(Driver request)
@@ -27,7 +27,7 @@ namespace Kasi.Infrastructure.Services.Web
                 if(response.IsSuccessStatusCode)
                 {
                     Stream responseBody = await response.Content.ReadAsStreamAsync();
-                    
+
                     Driver? newDriver = await JsonSerializer.DeserializeAsync<Driver>(
                         responseBody,
                         new JsonSerializerOptions{PropertyNameCaseInsensitive = true}
@@ -111,7 +111,7 @@ namespace Kasi.Infrastructure.Services.Web
                 if(response.IsSuccessStatusCode)
                 {
                     Stream responseBody = await response.Content.ReadAsStreamAsync();
-                    
+
                     Driver? updatedDriver = await JsonSerializer.DeserializeAsync<Driver>(
                         responseBody,
                         new JsonSerializerOptions{PropertyNameCaseInsensitive = true}

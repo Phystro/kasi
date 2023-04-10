@@ -14,8 +14,6 @@
   <ItemGroup>
     <ProjectReference Include="..\Shared\Kasi.Web.Shared.csproj" />
     <ProjectReference Include="..\..\..\Core\Domain\Kasi.Domain.csproj" />
-    <ProjectReference Include="..\..\..\Core\Application\Kasi.Application.csproj" />
-    <ProjectReference Include="..\..\..\Infrastructure\Kasi.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

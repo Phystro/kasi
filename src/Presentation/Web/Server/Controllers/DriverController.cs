@@ -3,12 +3,12 @@ using Microsoft.AspNetCore.Mvc;
 namespace Server.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class DriverController : ControllerBase
     {
-        private readonly DriverService _service;
+        private readonly IDriverService _service;
 
-        public DriverController(DriverService service)
+        public DriverController(IDriverService service)
         {
             _service = service;
         }

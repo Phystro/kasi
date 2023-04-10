@@ -1,5 +1,3 @@
-using Kasi.Domain.Entities;
-
 namespace Kasi.Infrastructure.Persisitence.Context
 {
     public class ApplicationDbContext : DbContext, IApplicationDbContext

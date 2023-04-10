@@ -1,11 +1,11 @@
-namespace Kasi.Web.Client.Pages
+namespace Kasi.Web.Client.Pages.Drivers
 {
-    public partial class Drivers// : ComponentBase
+    public partial class Drivers
     {
-        public IEnumerable<Driver> _drivers { get; set; } = new List<Driver>();
+        public IEnumerable<Driver> Items { get; set; } = new List<Driver>();
 
         [Inject]
-        private IDriverService _driverService { get; set; }
+        public required DriverService DriverService { get; set; }
 
         // public Drivers(IDriverService driverService)
         // {
@@ -17,7 +17,7 @@ namespace Kasi.Web.Client.Pages
         protected async override Task OnInitializedAsync()
         {
             Console.WriteLine("On Initialized  Started");
-            // _drivers = await _driverService.QueryAsync();
+            Items = await DriverService.QueryAsync();
             Console.WriteLine("On Initialized Ended");
             // IEnumerable<Driver> drivers = await _driverService.QueryAsync();
 
@@ -26,6 +26,5 @@ namespace Kasi.Web.Client.Pages
             //     _drivers = drivers;
             // }
         }
-
     }
 }
