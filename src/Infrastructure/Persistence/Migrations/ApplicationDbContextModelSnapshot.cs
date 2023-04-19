@@ -78,12 +78,17 @@ namespace Kasi.Infrastructure.Persistence.Migrations
             modelBuilder.Entity("Kasi.Domain.Entities.Driver", b =>
                 {
                     b.HasOne("Kasi.Domain.Entities.Team", "Team")
-                        .WithMany()
+                        .WithMany("Drivers")
                         .HasForeignKey("TeamId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Team");
+                });
+
+            modelBuilder.Entity("Kasi.Domain.Entities.Team", b =>
+                {
+                    b.Navigation("Drivers");
                 });
 #pragma warning restore 612, 618
         }

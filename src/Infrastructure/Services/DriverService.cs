@@ -15,10 +15,10 @@ namespace Kasi.Infrastructure.Services
         {
             // if(!ModelState.IsValid) return new JsonResult("Something Went Wrong"){StatusCode = 500};
 
-            // Team? team = await _context.Teams.AsNoTracking().FirstOrDefaultAsync(x => x.Id == request.TeamId);
+            Team? team = await _context.Teams.FirstOrDefaultAsync(x => x.Id == request.TeamId);
 
             Driver _driver = _mapper.Map<Driver>(request);
-            // _driver.Team = team;
+            _driver.Team = team;
             _context.Drivers.Add(_driver);
 
             await _context.SaveChangesAsync();
@@ -39,7 +39,7 @@ namespace Kasi.Infrastructure.Services
 
         public async Task<IEnumerable<DriverResponse>> QueryAsync()
         {
-            IEnumerable<Driver> _drivers = await _context.Drivers.ToListAsync();
+            IEnumerable<Driver> _drivers = await _context.Drivers.Include(x => x.Team).ToListAsync();
 
             IEnumerable<DriverResponse> driverResponseList = _mapper.Map<IEnumerable<DriverResponse>>(_drivers);
 
@@ -48,7 +48,7 @@ namespace Kasi.Infrastructure.Services
 
         public async Task<DriverResponse?> ReadAsync(string id)
         {
-            Driver? _driver = await _context.Drivers.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
+            Driver? _driver = await _context.Drivers.AsNoTracking().Include(x => x.Team).FirstOrDefaultAsync(x => x.Id == id);
             if(_driver is null) return null;
 
             DriverResponse driverResponse = _mapper.Map<DriverResponse>(_driver);
