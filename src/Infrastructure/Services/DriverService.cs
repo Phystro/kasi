@@ -15,10 +15,10 @@ namespace Kasi.Infrastructure.Services
         {
             // if(!ModelState.IsValid) return new JsonResult("Something Went Wrong"){StatusCode = 500};
 
-            Team? team = await _context.Teams.AsNoTracking().FirstOrDefaultAsync(x => x.Id == request.TeamId);
+            // Team? team = await _context.Teams.AsNoTracking().FirstOrDefaultAsync(x => x.Id == request.TeamId);
 
             Driver _driver = _mapper.Map<Driver>(request);
-            _driver.Team = team;
+            // _driver.Team = team;
             _context.Drivers.Add(_driver);
 
             await _context.SaveChangesAsync();
