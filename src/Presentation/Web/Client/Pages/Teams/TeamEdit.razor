@@ -1,0 +1,51 @@
+@page "/teams/edit"
+@page "/teams/edit/{id}"
+
+@if(string.IsNullOrEmpty(Id))
+{
+    <PageTitle>Add New Team</PageTitle>
+    <h1>Add New Team</h1>
+}
+else
+{
+    <PageTitle>Manage Team</PageTitle>
+    <h1>Manage Team</h1>
+}
+
+<EditForm Model="@TeamDetails" OnValidSubmit="@HandleValidRequest" OnInvalidSubmit="@HandleFailedRequest">
+    <div class="row">
+        <div class="col-md-9">
+            <div class="form-group">
+                <label class="col-md-3">Name</label>
+                <InputText class="col-md-9 form-control" @bind-Value="@TeamDetails.Name"></InputText>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-3">Alias</label>
+                <InputText class="col-md-9 form-control" @bind-Value="@TeamDetails.Alias"></InputText>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-3">Country</label>
+                <InputText class="col-md-9 form-control" @bind-Value="@TeamDetails.Country"></InputText>
+            </div>
+
+            <br/>
+
+            <p style="color: red;">@Message</p>
+        </div>
+
+        <div class="col-md-3 d-flex flex-column form-group">
+            <br/>
+            <button class="btn btn-warning md-3" type="submit">Save</button>
+            <br/>
+            <button class="btn btn-primary md-3" @onclick="@GoToTeams">Back</button>
+            
+            @if(!string.IsNullOrEmpty(Id))
+            {
+                <br/>
+                <button class="btn btn-danger md-3" @onclick="@DeleteTeam">Delete</button>
+            }
+        </div>
+    </div>
+</EditForm>

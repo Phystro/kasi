@@ -4,6 +4,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddScoped<IDriverService, DriverService>();
+builder.Services.AddScoped<ITeamService, TeamService>();
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
@@ -31,6 +32,9 @@ builder.Services.AddDbContext<ApplicationDbContext>( options =>
 //     provider.GetService<ApplicationDbContext>();
 // } );
 builder.Services.AddScoped<ApplicationDbContext>();
+
+// register automapper for dependency injection
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 var app = builder.Build();
 

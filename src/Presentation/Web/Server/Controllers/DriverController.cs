@@ -1,30 +1,33 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace Server.Controllers
+namespace Kasi.Server.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
     public class DriverController : ControllerBase
     {
         private readonly IDriverService _service;
+        private readonly ILogger<DriverController> _logger;
 
-        public DriverController(IDriverService service)
+        public DriverController(IDriverService service, ILogger<DriverController> logger)
         {
             _service = service;
+            _logger = logger;
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Driver>>> GetAsync()
+        public async Task<ActionResult<IEnumerable<DriverResponse>>> GetAsync()
         {
-            IEnumerable<Driver> drivers = await _service.QueryAsync();
+            _logger.LogInformation("[ + ] GetAsync");
+            IEnumerable<DriverResponse> drivers = await _service.QueryAsync();
             
             return Ok(drivers);
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Driver>> GetAsync(int id)
+        public async Task<ActionResult<DriverResponse>> GetAsync(string id)
         {
-            Driver? driver = await _service.ReadAsync(id);
+            DriverResponse? driver = await _service.ReadAsync(id);
 
             if(driver is null) return NotFound();
 
@@ -32,19 +35,19 @@ namespace Server.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateAsync(Driver request)
+        public async Task<IActionResult> CreateAsync(DriverRequest request)
         {
-            Driver driver = await _service.CreateAsync(request);
+            DriverResponse driverResponse = await _service.CreateAsync(request);
 
-            return CreatedAtAction( nameof(GetAsync), driver, driver.Id );
+            return CreatedAtAction( "Get", driverResponse, driverResponse.Id );
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateASync(Driver request, int id)
+        public async Task<IActionResult> UpdateASync(DriverRequest request, string id)
         {
-            if(id != request.Id) return BadRequest();
+            // if(id != request.Id) return BadRequest();
 
-            Driver? driver = await _service.UpdateAsync(request);
+            DriverResponse? driver = await _service.UpdateAsync(id, request);
 
             if(driver is null) return NotFound();
 
@@ -52,7 +55,7 @@ namespace Server.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteAsync(int id)
+        public async Task<IActionResult> DeleteAsync(string id)
         {
             bool result = await _service.DeleteAsync(id);
 

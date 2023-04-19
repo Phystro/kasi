@@ -7,6 +7,7 @@ namespace Kasi.Infrastructure.Persisitence.Context
         }
 
         public DbSet<Driver> Drivers => Set<Driver>();
+        public DbSet<Team> Teams => Set<Team>();
 
         async Task<int> IApplicationDbContext.SaveToDatabase()
         {

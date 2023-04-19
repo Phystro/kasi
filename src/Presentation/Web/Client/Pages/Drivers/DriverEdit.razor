@@ -1,0 +1,66 @@
+@page "/drivers/edit"
+@page "/drivers/edit/{id}"
+
+@if(string.IsNullOrEmpty(Id))
+{
+    <PageTitle>Add New Driver</PageTitle>
+    <h1>Add New Driver</h1>
+}
+else
+{
+    <PageTitle>Manage Driver</PageTitle>
+    <h1>Manage Driver</h1>
+}
+
+<EditForm Model="@Request" OnValidSubmit="@HandleValidRequest" OnInvalidSubmit="@HandleFailedRequest">
+    <div class="row">
+        <div class="col-md-9">
+            <div class="form-group">
+                <label class="col-md-3">FirstName</label>
+                <InputText class="col-md-9 form-control" @bind-Value="@Request.FirstName"></InputText>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-3">LastName</label>
+                <InputText class="col-md-9 form-control" @bind-Value="@Request.LastName"></InputText>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-3">Racing Number</label>
+                <InputText class="col-md-9 form-control" @bind-Value="@Request.RacingNumber"></InputText>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-3">Country</label>
+                <InputText class="col-md-9 form-control" @bind-Value="@Request.Country"></InputText>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-3">Team</label>
+                <InputSelect class="col-md-9 form-control" @bind-Value="@Request.TeamId" TValue="string">
+                    @foreach (TeamResponse team in TeamList)
+                    {
+                        <option value="@team.Id">@team.Name</option>
+                    }
+                </InputSelect>
+            </div>
+
+            <br/>
+
+            <p style="color: red;">@Message</p>
+        </div>
+
+        <div class="col-md-3 d-flex flex-column form-group">
+            <br/>
+            <button class="btn btn-warning md-3" type="submit">Save</button>
+            <br/>
+            <button class="btn btn-primary md-3" @onclick="@GoToDrivers">Back</button>
+            
+            @if(!string.IsNullOrEmpty(Id))
+            {
+                <br/>
+                <button class="btn btn-danger md-3" @onclick="@DeleteDriver">Delete</button>
+            }
+        </div>
+    </div>
+</EditForm>

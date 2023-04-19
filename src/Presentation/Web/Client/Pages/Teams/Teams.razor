@@ -1,0 +1,63 @@
+@page "/teams"
+
+<PageTitle>F1 Teams</PageTitle>
+<h1>Formula One Teams</h1>
+
+<br/>
+
+<div class="row">
+    <div class="col-md-3 d-flex flex-column">
+        <h4>Manage Teams</h4>
+        <button class="btn btn-primary md-3" onclick="@HandleAddTeam">Add New Team</button>
+        <br/>
+        <button class="btn btn-secondary md-3">Edit Team</button>
+        <br/>
+        <br/>
+
+        <h5 style="text-align: left;">Number of Teams</h5>
+        <h2 style="text-align: left;">@TeamCount</h2>
+        <br/>
+    </div>
+
+    <div class="col-md-9">
+        <h4>F1 Teams</h4>
+        @if(isLoading)
+        {
+            <p><em>Loading...</em></p>
+        }
+        else if(Items.Any() && !isLoading)
+        {
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th style="text-align: left">Id</th>
+                        <th style="text-align: left">Name</th>
+                        <th style="text-align: left">Alias</th>
+                        <th style="text-align: left">Country</th>
+                        <th style="text-align: left;">Manage</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (TeamResponse team in Items)
+                    {
+                        <tr>
+                            <td style="text-align: left">@team.Id</td>
+                            <td style="text-align: left">@team.Name</td>
+                            <td style="text-align: left">@team.Alias</td>
+                            <td style="text-align: left">@team.Country</td>
+                            <td style="text-align: left;">
+                                <a class="btn btn-warning" style="text-align: center;" href="@($"teams/edit/{team.Id}")">Edit</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else if(!Items.Any() && !isLoading)
+        {
+            <p>No Teams Found!</p>
+        }
+    </div>
+</div>
+

@@ -2,29 +2,26 @@ namespace Kasi.Web.Client.Pages.Drivers
 {
     public partial class Drivers
     {
-        public IEnumerable<Driver> Items { get; set; } = new List<Driver>();
-
         [Inject]
-        public required DriverService DriverService { get; set; }
+        public required IDriverService DriverService { get; set; }
+        [Inject]
+        public required NavigationManager Navigation { get; set; }
 
-        // public Drivers(IDriverService driverService)
-        // {
-        //     Console.WriteLine("On Constructor Started");
-        //     _driverService = driverService;
-        //     Console.WriteLine("On Constructor Ended");
-        // }
+        public IEnumerable<DriverResponse> Items { get; set; } = new List<DriverResponse>();
+        public int DriversCount { get; set; } = 0;
 
+        public bool isLoading = true;
+        
         protected async override Task OnInitializedAsync()
         {
-            Console.WriteLine("On Initialized  Started");
             Items = await DriverService.QueryAsync();
-            Console.WriteLine("On Initialized Ended");
-            // IEnumerable<Driver> drivers = await _driverService.QueryAsync();
+            isLoading = false;
+            DriversCount = Items.Count();
+        }
 
-            // if(drivers != null && drivers.Any())
-            // {
-            //     _drivers = drivers;
-            // }
+        protected void HandleAddDriver()
+        {
+            Navigation.NavigateTo("/drivers/edit");
         }
     }
 }

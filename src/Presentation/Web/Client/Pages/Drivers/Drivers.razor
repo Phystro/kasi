@@ -5,32 +5,60 @@
 
 <br/>
 
-@if(Items != null && Items.Any())
-{
-    <table>
-        <thead>
-            <tr>
-                <th style="text-align:center">Id</th>
-                <th style="text-align:center">Name</th>
-                <th style="text-align:center">Country</th>
-                <th style="text-align:center">Racing Number</th>
-            </tr>
-        </thead>
+<div class="row">
+    <div class="col-md-3 d-flex flex-column">
+        <h4>Manage Drivers</h4>
+        <button class="btn btn-primary md-3" onclick="@HandleAddDriver">Add New Driver</button>
+        <br/>
+        <button class="btn btn-secondary md-3">Edit Driver</button>
+        <br/>
+        <br/>
 
-        <tbody>
-            @foreach (Driver driver in Items)
-            {
-                <tr>
-                    <td style="text-align:right">@driver.Id</td>
-                    <td style="text-align:right">@driver.Name</td>
-                    <td style="text-align:right">@driver.Country</td>
-                    <td style="text-align:center">@driver.RacingNumber</td>
-                </tr>
-            }
-        </tbody>
-    </table>
-}
-else
-{
-    <p>No Drivers Found!</p>
-}
+        <h5 style="text-align: left;">Number of Drivers</h5>
+        <h2 style="text-align: left;">@DriversCount</h2>
+        <br/>
+    </div>
+
+    <div class="col-md-9">
+        <h4>Drivers</h4>
+        @if(isLoading)
+        {
+            <p><em>Loading...</em></p>
+        }
+        else if(Items.Any() && !isLoading)
+        {
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th style="text-align: left">Id</th>
+                        <th style="text-align: left">Name</th>
+                        <th style="text-align: left">Racing Number</th>
+                        <th style="text-align: left">Country</th>
+                        <th style="text-align: left">Team</th>
+                        <th style="text-align: left;">Manage</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (DriverResponse driver in Items)
+                    {
+                        <tr>
+                            <td style="text-align: left">@driver.Id</td>
+                            <td style="text-align: left">@driver.FullName</td>
+                            <td style="text-align: left">@driver.RacingNumber</td>
+                            <td style="text-align: left">@driver.Country</td>
+                            <td style="text-align: left">@driver.TeamName</td>
+                            <td style="text-align: left;">
+                                <a class="btn btn-warning" style="text-align: center;" href="@($"drivers/edit/{driver.Id}")">Edit</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else if(!Items.Any() && !isLoading)
+        {
+            <p>No Drivers Found!</p>
+        }
+    </div>
+</div>
