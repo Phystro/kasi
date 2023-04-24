@@ -11,7 +11,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Kasi.Infrastructure.Persistence.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230419152643_InitialCreate")]
+    [Migration("20230424183953_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />

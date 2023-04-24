@@ -1,2 +1,0 @@
-dotnet ef migrations add InitialCreate -o .\Persistance\Migrations\ --startup-project ..\Api\Mwezi.Services.Api.csproj
-dotnet ef database update --startup-project ..\Api\Mwezi.Services.Api.csproj

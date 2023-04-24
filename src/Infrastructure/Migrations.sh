@@ -1,17 +1,70 @@
-echo "Initial Create Migrations"
-echo ""
+#!/bin/bash
 
-dotnet ef migrations add InitialCreate -o ./Persistence/Migrations/ --startup-project ../Presentation/Web/Server/Kasi.Web.Server.csproj
+# Set the migration path
+MIGRATIONS_PATH="./Persistence/Migrations/"
+STARTUP_PROJECT="../Presentation/Web/Server/Kasi.Web.Server.csproj"
 
-echo ""
-echo "DONE"
-echo ""
+while getopts ":a:r" opt; do
+  case $opt in
+    a)
+      NAME="$OPTARG"
+      echo "Adding migration: $NAME"
+      echo ""
 
-echo "Database Update"
-echo ""
+      dotnet ef migrations add $NAME -o $MIGRATIONS_PATH --startup-project $STARTUP_PROJECT
+      # ls -alh $MIGRATIONS_PATH
 
-dotnet ef database update --startup-project ../Presentation/Web/Server/Kasi.Web.Server.csproj
+      echo ""
+      echo "DONE"
+      echo ""
 
-echo ""
-echo "DONE"
+      echo "Updating database"
+      echo ""
+
+      # ls -alh $STARTUP_PROJECT
+      dotnet ef database update --startup-project $STARTUP_PROJECT
+
+      echo ""
+      echo "DONE"
+      ;;
+    r)
+      echo "Deleting migration"
+      echo ""
+
+      # Add code for deletion command here
+      echo "DELETION HERE"
+      rm -rfv $MIGRATIONS_PATH
+      # ls -alh $MIGRATIONS_PATH
+
+      echo ""
+      echo "DONE"
+      ;;
+    \?)
+      echo "Invalid option: -$OPTARG" >&2
+      exit 1
+      ;;
+    :)
+      case $OPTARG in
+        a)
+          echo "Option -$OPTARG requires an argument for migration name." >&2
+          exit 1
+          ;;
+        *)
+          echo "Invalid option: -$OPTARG" >&2
+          exit 1
+          ;;
+      esac
+      ;;
+    *)
+      echo "Invalid option: -$OPTARG" >&2
+      exit 1
+      ;;
+  esac
+done
+
+# Check if -a or -r options are provided
+if [[ $OPTIND -eq 1 ]]; then
+  echo "Please provide either -a option with a migration name or -r option for deletion." >&2
+  exit 1
+fi
 
