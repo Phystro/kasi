@@ -4,12 +4,12 @@ namespace Kasi.Server.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class DriverController : ControllerBase
+    public class DriversController : ControllerBase
     {
         private readonly IDriverService _service;
-        private readonly ILogger<DriverController> _logger;
+        private readonly ILogger<DriversController> _logger;
 
-        public DriverController(IDriverService service, ILogger<DriverController> logger)
+        public DriversController(IDriverService service, ILogger<DriversController> logger)
         {
             _service = service;
             _logger = logger;

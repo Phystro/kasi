@@ -4,12 +4,12 @@ namespace Kasi.Server.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class TeamController : ControllerBase
+    public class TeamsController : ControllerBase
     {
         private readonly ITeamService _service;
-        private readonly ILogger<TeamController> _logger;
+        private readonly ILogger<TeamsController> _logger;
 
-        public TeamController(ITeamService service, ILogger<TeamController> logger)
+        public TeamsController(ITeamService service, ILogger<TeamsController> logger)
         {
             _service = service;
             _logger = logger;
