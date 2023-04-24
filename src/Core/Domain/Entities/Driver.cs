@@ -10,6 +10,6 @@ namespace Kasi.Domain.Entities
         public string RacingNumber { get; set; } = string.Empty;
         
         public string TeamId { get; set; } = string.Empty;
-        public Team? Team { get; set; } = null;
+        public Team? Team { get; set; }
     }
 }
