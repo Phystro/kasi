@@ -10,6 +10,7 @@ namespace Kasi.Domain.DTO.DriverDTO
 
         public string RacingNumber { get; set; } = string.Empty;
 
+        public string TeamId { get; set; } = string.Empty;
         public string TeamName { get; set; } = string.Empty;
 	}
 }

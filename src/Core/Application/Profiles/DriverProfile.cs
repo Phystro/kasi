@@ -87,6 +87,12 @@ namespace Kasi.Application.Profiles
 						)
 					)
 				.ForMember(
+					dest => dest.TeamId,
+					opt => opt.MapFrom(
+							x => x.Team!.Id
+						)
+					)
+				.ForMember(
 					dest => dest.TeamName,
 					opt => opt.MapFrom(
 							x => x.Team!.Name

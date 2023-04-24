@@ -8,6 +8,7 @@ namespace Kasi.Web.Client.Pages.Drivers
         public required NavigationManager Navigation { get; set; }
 
         public IEnumerable<DriverResponse> Items { get; set; } = new List<DriverResponse>();
+        public Team DriverTeam { get; set; } = new Team();
         public int DriversCount { get; set; } = 0;
 
         public bool isLoading = true;

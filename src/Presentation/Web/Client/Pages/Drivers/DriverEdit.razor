@@ -12,32 +12,32 @@ else
     <h1>Manage Driver</h1>
 }
 
-<EditForm Model="@Request" OnValidSubmit="@HandleValidRequest" OnInvalidSubmit="@HandleFailedRequest">
+<EditForm Model="@Response" OnValidSubmit="@HandleValidRequest" OnInvalidSubmit="@HandleFailedRequest">
     <div class="row">
         <div class="col-md-9">
             <div class="form-group">
                 <label class="col-md-3">FirstName</label>
-                <InputText class="col-md-9 form-control" @bind-Value="@Request.FirstName"></InputText>
+                <InputText class="col-md-9 form-control" @bind-Value="@Response.FirstName">@Response.FirstName</InputText>
             </div>
 
             <div class="form-group">
                 <label class="col-md-3">LastName</label>
-                <InputText class="col-md-9 form-control" @bind-Value="@Request.LastName"></InputText>
+                <InputText class="col-md-9 form-control" @bind-Value="@Response.LastName"></InputText>
             </div>
 
             <div class="form-group">
                 <label class="col-md-3">Racing Number</label>
-                <InputText class="col-md-9 form-control" @bind-Value="@Request.RacingNumber"></InputText>
+                <InputText class="col-md-9 form-control" @bind-Value="@Response.RacingNumber"></InputText>
             </div>
 
             <div class="form-group">
                 <label class="col-md-3">Country</label>
-                <InputText class="col-md-9 form-control" @bind-Value="@Request.Country"></InputText>
+                <InputText class="col-md-9 form-control" @bind-Value="@Response.Country"></InputText>
             </div>
 
             <div class="form-group">
                 <label class="col-md-3">Team</label>
-                <InputSelect class="col-md-9 form-control" @bind-Value="@Request.TeamId" TValue="string">
+                <InputSelect class="col-md-9 form-control" @bind-Value="@Response.TeamId" TValue="string">
                     @foreach (TeamResponse team in TeamList)
                     {
                         <option value="@team.Id">@team.Name</option>
@@ -64,3 +64,5 @@ else
         </div>
     </div>
 </EditForm>
+
+

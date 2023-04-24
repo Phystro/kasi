@@ -11,7 +11,7 @@ namespace Kasi.Web.Client.Pages.Drivers
         [Inject]
         public required NavigationManager Navigation { get; set; }
 
-        protected DriverResponse DriverDetails { get; set; } = new DriverResponse();
+        protected DriverResponse Response { get; set; } = new DriverResponse();
         protected DriverRequest Request { get; set; } = new DriverRequest();
         protected IEnumerable<TeamResponse> TeamList { get; set; } = new List<TeamResponse>();
         protected string Message { get; set; } = string.Empty;
@@ -31,7 +31,7 @@ namespace Kasi.Web.Client.Pages.Drivers
 
                 if(response != null)
                 {
-                    DriverDetails = response;
+                    Response = response;
                 }
             }
         }
@@ -63,15 +63,12 @@ namespace Kasi.Web.Client.Pages.Drivers
         {            
             if(string.IsNullOrEmpty(Id))
             {
-                // add driver
-                // DriverRequest request = new DriverRequest()
-                // {
-                // Request.FirstName = DriverDetails.FirstName,
-                // Request.LastName = DriverDetails.LastName,
-                // Request.Country = DriverDetails.Country,
-                // Request.RacingNumber = DriverDetails.RacingNumber,
-                // Request.TeamId = .TeamId
-                // };
+                Request.FirstName = Response.FirstName;
+                Request.LastName = Response.LastName;
+                Request.Country = Response.Country;
+                Request.RacingNumber = Response.RacingNumber;
+                Request.TeamId = Response.TeamId;
+
                 DriverResponse response = await DriverService.CreateAsync(Request);
 
                 if(response != null)
@@ -81,15 +78,12 @@ namespace Kasi.Web.Client.Pages.Drivers
             }
             else
             {
-                // Update Driver
-                // DriverRequest request = new DriverRequest()
-                // {
-                //     FirstName = DriverDetails.FirstName,
-                //     LastName = DriverDetails.LastName,
-                //     Country = DriverDetails.Country,
-                //     RacingNumber = DriverDetails.RacingNumber,
-                //     TeamId = DriverDetails.TeamId
-                // };
+                Request.FirstName = Response.FirstName;
+                Request.LastName = Response.LastName;
+                Request.Country = Response.Country;
+                Request.RacingNumber = Response.RacingNumber;
+                Request.TeamId = Response.TeamId;
+
                 bool response = await DriverService.UpdateAsync(Id, Request);
 
                 if(response)
