@@ -5,9 +5,9 @@ namespace Kasi.Domain.Entities
         public int Points { get; set; }
 
         public string TeamId { get; set; } = string.Empty;
-        public Team Team { get; set; }
+        public Team? Team { get; set; }
 
         public string RaceId { get; set; } = string.Empty;
-        public Race Race { get; set; }
+        public Race? Race { get; set; }
     }
 }
